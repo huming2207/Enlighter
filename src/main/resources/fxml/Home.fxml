@@ -1,14 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import org.controlsfx.control.ToggleSwitch?>
 
-<GridPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.HomeController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</GridPane>
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+   <top>
+       <AnchorPane prefHeight="50" style="-fx-background-color: #e5e5e5;">
+           <Button layoutX="526.0" layoutY="13.0" mnemonicParsing="false" text="Connect" AnchorPane.leftAnchor="526.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0" />
+         <ChoiceBox layoutX="166.0" layoutY="13.0" prefHeight="25.0" prefWidth="269.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="165.0" />
+         <ToggleSwitch layoutX="14.0" layoutY="15.0" prefHeight="20.0" prefWidth="71.0" text="Power  " AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="516.0" />
+       </AnchorPane>
+   </top>
+   <center>
+       <AnchorPane prefHeight="213.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+           <GridPane layoutX="65.0" layoutY="25.0" prefHeight="30.0" prefWidth="473.0">
+               <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="51.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="283.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="29.0" />
+               </columnConstraints>
+               <rowConstraints>
+                   <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                   <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <Label text="Darker" GridPane.halignment="RIGHT">
+                   <GridPane.margin>
+                       <Insets right="10.0" />
+                   </GridPane.margin>
+               </Label>
+               <Slider GridPane.columnIndex="1" />
+               <Label text="Brighter" GridPane.columnIndex="2">
+                   <GridPane.margin>
+                       <Insets left="5.0" />
+                   </GridPane.margin>
+               </Label>
+               <Label text="Brightness" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+           </GridPane>
+         <GridPane layoutX="65.0" layoutY="105.0" prefHeight="30.0" prefWidth="473.0">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="51.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="283.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="29.0" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+               <Label text="Warmer" GridPane.halignment="RIGHT">
+                  <GridPane.margin>
+                     <Insets right="10.0" />
+                  </GridPane.margin>
+               </Label>
+               <Slider GridPane.columnIndex="1" />
+               <Label text="Cooler" GridPane.columnIndex="2">
+                  <GridPane.margin>
+                     <Insets left="5.0" />
+                  </GridPane.margin>
+               </Label>
+               <Label text="Color control / Reading mode" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            </children>
+         </GridPane>
+         <GridPane layoutX="65.0" layoutY="153.0" prefHeight="43.0" prefWidth="473.0">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="51.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="283.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="29.0" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+               <Label text="Color control / Free mode" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+               <ColorPicker prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            </children>
+         </GridPane>
+       </AnchorPane>
+   </center>
+   <bottom>
+      <TitledPane animated="false" collapsible="false" prefHeight="140.0" prefWidth="602.0" text="Device details" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="74.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="474.0" minWidth="10.0" prefWidth="224.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.0" minWidth="10.0" prefWidth="226.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.0" minWidth="10.0" prefWidth="72.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="WiFi:" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="System:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="210.0" text="WiFi Settings" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin></Button>
+                  <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="212.0" text="Reboot / Reset" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Label prefHeight="17.0" prefWidth="505.0" text="Unknown" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+                  <Label prefHeight="17.0" prefWidth="510.0" text="Unknown" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </content>
+      </TitledPane>
+   </bottom>
+</BorderPane>
