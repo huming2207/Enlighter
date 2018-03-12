@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TitledPane?>
@@ -18,8 +18,8 @@
     <top>
         <AnchorPane prefHeight="50" style="-fx-background-color: #e5e5e5;">
             <Button layoutX="510.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" text="Connect" AnchorPane.rightAnchor="14.0" />
-            <ChoiceBox layoutX="166.0" layoutY="13.0" prefHeight="25.0" prefWidth="269.0" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="165.0" />
             <ToggleButton layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="74.0" text="Power" AnchorPane.leftAnchor="14.0" />
+         <ComboBox fx:id="deviceComboBox" layoutX="160.0" layoutY="13.0" prefHeight="25.0" prefWidth="281.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="159.0" />
         </AnchorPane>
     </top>
     <center>
