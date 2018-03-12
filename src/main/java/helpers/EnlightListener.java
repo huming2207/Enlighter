@@ -24,8 +24,6 @@ public class EnlightListener implements ServiceListener
         System.out.println(String.format("Service added, IP: %s, name: %s",
                 deviceAddr,
                 event.getName()));
-
-        devices.add(new Device(deviceAddr, event.getName()));
     }
 
     @Override
@@ -53,6 +51,8 @@ public class EnlightListener implements ServiceListener
         System.out.println(String.format("Service resolved, IP: %s, name: %s",
                 deviceAddr,
                 event.getName()));
+
+        devices.add(new Device(deviceAddr, event.getName()));
     }
 
     private Device findDeviceInList(String addr, String name)
