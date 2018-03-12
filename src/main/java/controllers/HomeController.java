@@ -13,6 +13,7 @@ import models.Device;
 import javax.jmdns.JmDNS;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
 public class HomeController
@@ -29,8 +30,12 @@ public class HomeController
         deviceList.set(FXCollections.observableArrayList());
 
         try {
+            System.out.println("Localhost: " + InetAddress.getLocalHost().toString());
             JmDNS jmDNS = JmDNS.create(InetAddress.getLocalHost());
-            jmDNS.addServiceListener("_http._tcp", new EnlightListener(deviceList.get()));
+
+            // Here we should set type to "_http._tcp.local." but not "_http.tcp."
+            jmDNS.addServiceListener("_http._tcp.local.", new EnlightListener(deviceList.get()));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,6 +44,6 @@ public class HomeController
     @FXML
     private void initialize()
     {
-        deviceComboBox.itemsProperty().bindBidirectional(deviceList);
+        deviceComboBox.itemsProperty().bind(deviceList);
     }
 }
