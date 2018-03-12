@@ -13,8 +13,6 @@ import models.Device;
 import javax.jmdns.JmDNS;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
 
 public class HomeController
 {
@@ -34,7 +32,7 @@ public class HomeController
             JmDNS jmDNS = JmDNS.create(InetAddress.getLocalHost());
 
             // Here we should set type to "_http._tcp.local." but not "_http.tcp."
-            jmDNS.addServiceListener("_http._tcp.local.", new EnlightListener(deviceList.get()));
+            jmDNS.addServiceListener("_http._tcp.local.", new EnlightListener(deviceList.getValue()));
 
         } catch (IOException e) {
             e.printStackTrace();
