@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import models.Device;
+import models.LedInfo;
+import models.SysInfo;
 
 import javax.jmdns.JmDNS;
 import java.io.IOException;
@@ -17,6 +19,9 @@ import java.net.InetAddress;
 public class HomeController
 {
     private ObjectProperty<ObservableList<Device>> deviceList;
+    private LedInfo ledInfo;
+    private SysInfo sysInfo;
+    private Device selectedDevice;
 
     @FXML
     private ComboBox<Device> deviceComboBox;
@@ -39,9 +44,27 @@ public class HomeController
         }
     }
 
+    public SysInfo getSysInfo()
+    {
+        return this.sysInfo;
+    }
+
+    public LedInfo getLedInfo()
+    {
+        return this.ledInfo;
+    }
+
     @FXML
     private void initialize()
     {
         deviceComboBox.itemsProperty().bind(deviceList);
+    }
+
+    @FXML
+    private void handleDeviceSelection()
+    {
+        this.selectedDevice = deviceComboBox.getValue();
+        System.out.println(String.format("Selected device: %s, IP: %s",
+                selectedDevice.getDeviceName(), selectedDevice.getDeviceAddr()));
     }
 }
