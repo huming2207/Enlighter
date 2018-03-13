@@ -2,18 +2,19 @@ package helpers;
 
 import javafx.collections.ObservableList;
 import models.Device;
+import models.SysInfo;
 
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceListener;
 
-public class EnlightListener implements ServiceListener
+public class EnlightMDnsListener implements ServiceListener
 {
     private ObservableList<Device> devices;
 
-    public EnlightListener(ObservableList<Device> devices)
+    public EnlightMDnsListener(ObservableList<Device> devices)
     {
         this.devices = devices;
-        System.out.println("EnlightListener: initialized.");
+        System.out.println("EnlightMDnsListener: initialized.");
     }
 
     @Override
@@ -52,7 +53,11 @@ public class EnlightListener implements ServiceListener
                 deviceAddr,
                 event.getName()));
 
-        devices.add(new Device(deviceAddr, event.getName()));
+        if(!event.getName().startsWith("enlight-")) {
+            System.out.println(String.format("mDNS device named \"%s\" is not an Enlight lamp.", event.getName()));
+        } else {
+            devices.add(new Device(deviceAddr, event.getName()));
+        }
     }
 
     private Device findDeviceInList(String addr, String name)

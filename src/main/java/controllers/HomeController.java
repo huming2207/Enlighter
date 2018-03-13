@@ -1,12 +1,11 @@
 package controllers;
 
-import helpers.EnlightListener;
+import helpers.EnlightMDnsListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import models.Device;
 import models.LedInfo;
@@ -37,7 +36,7 @@ public class HomeController
             JmDNS jmDNS = JmDNS.create(InetAddress.getLocalHost());
 
             // Here we should set type to "_http._tcp.local." but not "_http.tcp."
-            jmDNS.addServiceListener("_http._tcp.local.", new EnlightListener(deviceList.getValue()));
+            jmDNS.addServiceListener("_http._tcp.local.", new EnlightMDnsListener(deviceList.getValue()));
 
         } catch (IOException e) {
             e.printStackTrace();
