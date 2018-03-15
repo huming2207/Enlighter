@@ -19,24 +19,27 @@
         <AnchorPane prefHeight="213.0" prefWidth="602.0" BorderPane.alignment="CENTER">
             <Label layoutX="102.0" layoutY="25.0" text="Darker" AnchorPane.bottomAnchor="168.0"
                    AnchorPane.leftAnchor="102.0" AnchorPane.topAnchor="25.0"/>
-            <Slider layoutX="168.0" layoutY="26.0" prefHeight="16.0" prefWidth="267.0" AnchorPane.bottomAnchor="168.0"
-                    AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="26.0"
-                    min="1" max="255"/>
+            <Slider fx:id="brightnessSlider" layoutX="168.0" layoutY="26.0" prefHeight="16.0" prefWidth="267.0"
+                    AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="168.0"
+                    AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="26.0" min="1" max="255"/>
             <Label layoutX="447.0" layoutY="25.0" text="Brighter" AnchorPane.bottomAnchor="168.0"
                    AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="25.0"/>
             <Label alignment="CENTER" layoutX="267.0" layoutY="42.0" text="Brightness" AnchorPane.bottomAnchor="151.0"
                    AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="232.0" AnchorPane.topAnchor="42.0"/>
             <Label layoutX="99.0" layoutY="97.0" text="Warmer" AnchorPane.bottomAnchor="96.0"
                    AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="97.0"/>
-            <Slider layoutX="167.0" layoutY="97.0" prefHeight="16.0" prefWidth="267.0" AnchorPane.bottomAnchor="97.0"
-                    AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="97.0"/>
+            <Slider fx:id="colorTempSlider" layoutX="167.0" layoutY="97.0"
+                    prefHeight="16.0" prefWidth="267.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="167.0"
+                    AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="97.0"
+                    min="1000" max="8000" minorTickCount="5"  majorTickUnit="20"/>
             <Label alignment="CENTER" layoutX="240.0" layoutY="114.0" text="Color / Reading mode"
                    AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="227.0"
                    AnchorPane.topAnchor="114.0"/>
             <Label layoutX="458.0" layoutY="97.0" text="Cooler" AnchorPane.bottomAnchor="96.0"
                    AnchorPane.rightAnchor="107.0" AnchorPane.topAnchor="97.0"/>
-            <ColorPicker layoutX="175.0" layoutY="148.0" maxHeight="27.0" maxWidth="262.0" minHeight="-Infinity"
-                         minWidth="-Infinity" prefHeight="27.0" prefWidth="262.0" scaleShape="false"
+            <ColorPicker fx:id="freeColorPicker" layoutX="175.0" layoutY="148.0"
+                         maxHeight="27.0" maxWidth="262.0" minHeight="-Infinity" minWidth="-Infinity"
+                         prefHeight="27.0" prefWidth="262.0" scaleShape="false"
                          AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="163.0"/>
             <Label alignment="CENTER" layoutX="251.0" layoutY="175.0" text="Color / Free mode"
                    AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="239.0"/>
