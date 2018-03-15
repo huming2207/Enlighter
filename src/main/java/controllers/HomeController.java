@@ -1,6 +1,6 @@
 package controllers;
 
-import helpers.EnlightInfoFetcher;
+import helpers.EnlightLedInfoFetcher;
 import helpers.EnlightMDnsListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,7 +25,7 @@ public class HomeController
     private LedInfo ledInfo = new LedInfo();
     private SysInfo sysInfo = new SysInfo();
     private Device selectedDevice = null;
-    private EnlightInfoFetcher infoFetcher = new EnlightInfoFetcher(ledInfo, sysInfo);
+    private EnlightLedInfoFetcher infoFetcher = new EnlightLedInfoFetcher(ledInfo);
 
     @FXML
     private ComboBox<Device> deviceComboBox;
@@ -87,8 +87,7 @@ public class HomeController
         System.out.println(String.format("Selected device: %s, IP: %s",
                 selectedDevice.getDeviceName(), selectedDevice.getDeviceAddr()));
 
-        infoFetcher.getLedInfo(this.selectedDevice.getDeviceAddr());
-        infoFetcher.getSystemInfo(this.selectedDevice.getDeviceAddr());
+        infoFetcher.fetchInfo(this.selectedDevice.getDeviceAddr());
     }
 
     public static void showError(String error)
