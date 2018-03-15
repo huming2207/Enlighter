@@ -2,22 +2,42 @@ package models;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
 
 public class LedInfo
 {
-    private IntegerProperty brightness;
-    private IntegerProperty color;
+    private IntegerProperty brightness = new SimpleIntegerProperty();
+    private IntegerProperty color = new SimpleIntegerProperty();
+    private transient ObjectProperty<Color> colorProperty = new SimpleObjectProperty<>();
     private transient ObjectBinding<Color> colorBinding;
 
     public LedInfo()
     {
-        this.brightness = new SimpleIntegerProperty();
-        this.color = new SimpleIntegerProperty();
-        this.colorBinding = Bindings.createObjectBinding(() -> intToColor(getColor()), colorProperty());
+        // Here we need to allow bi-direct bind, simply convert it to color property instead...
+        // TODO: refactor this shit...
+        this.colorBinding = Bindings.createObjectBinding(() -> intToColor(getColor()), this.color);
+        this.colorBinding.addListener((observable, oldValue, newValue) -> {
+            System.out.println("Color changed to: " + newValue.toString());
+            colorProperty.set(newValue);
+        });
+    }
+
+    public Color getColorProperty()
+    {
+        return colorProperty.get();
+    }
+
+    public ObjectProperty<Color> colorProperty()
+    {
+        return colorProperty;
+    }
+
+    public void setColorProperty(Color colorProperty)
+    {
+        this.colorProperty.set(colorProperty);
     }
 
     public int getBrightness()
@@ -38,22 +58,6 @@ public class LedInfo
     public int getColor()
     {
         return color.get();
-    }
-
-    public IntegerProperty colorProperty()
-    {
-        return color;
-    }
-
-
-    public Color getColorBinding()
-    {
-        return colorBinding.get();
-    }
-
-    public ObjectBinding<Color> colorBindingProperty()
-    {
-        return colorBinding;
     }
 
     /**

@@ -1,22 +1,36 @@
 package models;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class SysInfo
 {
-    private IntegerProperty ledCount;
-    private BooleanProperty sysInited;
-    private IntegerProperty sysFreeRam;
-    private StringProperty sysSdkVer;
-    private StringProperty sysId;
-    private IntegerProperty  sysChipRev;
-    private BooleanProperty sysDualCore;
-    private StringProperty sysVer;
-    private StringProperty netIp;
-    private StringProperty netSsid;
-    private IntegerProperty netSig;
+    private IntegerProperty ledCount = new SimpleIntegerProperty();
+    private BooleanProperty sysInited = new SimpleBooleanProperty();
+    private IntegerProperty sysFreeRam = new SimpleIntegerProperty();
+    private StringProperty sysSdkVer = new SimpleStringProperty();
+    private StringProperty sysId = new SimpleStringProperty();
+    private IntegerProperty sysChipRev = new SimpleIntegerProperty();
+    private BooleanProperty sysDualCore = new SimpleBooleanProperty();
+    private StringProperty sysVer = new SimpleStringProperty();
+    private StringProperty netIp = new SimpleStringProperty();
+    private StringProperty netSsid = new SimpleStringProperty();
+    private IntegerProperty netSig = new SimpleIntegerProperty();
+
+    public void clone(SysInfo sysInfo)
+    {
+        // Use invoke
+        this.ledCount.set(sysInfo.ledCount.get());
+        this.sysInited.set(sysInfo.sysInited.get());
+        this.sysFreeRam.set(sysInfo.sysFreeRam.get());
+        this.sysSdkVer.set(sysInfo.sysSdkVer.get());
+        this.sysId.set(sysInfo.sysId.get());
+        this.sysChipRev.set(sysInfo.sysChipRev.get());
+        this.sysDualCore.set(sysInfo.sysDualCore.get());
+        this.sysVer.set(sysInfo.sysVer.get());
+        this.netIp.set(sysInfo.netIp.get());
+        this.netSsid.set(sysInfo.netSsid.get());
+        this.netSig.set(sysInfo.netSig.get());
+    }
 
     public int getLedCount()
     {
