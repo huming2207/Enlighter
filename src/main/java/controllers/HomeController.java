@@ -2,9 +2,7 @@ package controllers;
 
 import helpers.EnlightInfoFetcher;
 import helpers.EnlightMDnsListener;
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
-import javafx.scene.paint.Color;
 import models.Device;
 import models.LedInfo;
 import models.SysInfo;
@@ -27,8 +24,8 @@ public class HomeController
     private ObjectProperty<ObservableList<Device>> deviceList;
     private LedInfo ledInfo = new LedInfo();
     private SysInfo sysInfo = new SysInfo();
-    private Device selectedDevice;
-    private EnlightInfoFetcher infoFetcher = new EnlightInfoFetcher();
+    private Device selectedDevice = null;
+    private EnlightInfoFetcher infoFetcher = new EnlightInfoFetcher(ledInfo, sysInfo);
 
     @FXML
     private ComboBox<Device> deviceComboBox;
@@ -77,10 +74,10 @@ public class HomeController
         deviceComboBox.itemsProperty().bind(deviceList);
 
         // Bind color to color picker
-        freeColorPicker.valueProperty().bind(ledInfo.colorBindingProperty());
+        freeColorPicker.valueProperty().bindBidirectional(ledInfo.colorProperty());
 
         // Bind brightness to brightness slider
-        brightnessSlider.valueProperty().bind(ledInfo.brightnessProperty());
+        brightnessSlider.valueProperty().bindBidirectional(ledInfo.brightnessProperty());
     }
 
     @FXML
@@ -90,15 +87,13 @@ public class HomeController
         System.out.println(String.format("Selected device: %s, IP: %s",
                 selectedDevice.getDeviceName(), selectedDevice.getDeviceAddr()));
 
-        Platform.runLater(() -> {
-            try {
-                ledInfo.clone(infoFetcher.getLedInfo(selectedDevice.getDeviceAddr()));
-            } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR,
-                        "Cannot fetch LED info from device: " + e.getMessage());
-                alert.show();
-                e.printStackTrace();
-            }
-        });
+        infoFetcher.getLedInfo(this.selectedDevice.getDeviceAddr());
+        infoFetcher.getSystemInfo(this.selectedDevice.getDeviceAddr());
+    }
+
+    public static void showError(String error)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR, error);
+        alert.show();
     }
 }
