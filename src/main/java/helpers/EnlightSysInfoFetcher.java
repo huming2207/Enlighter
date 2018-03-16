@@ -9,10 +9,10 @@ import okhttp3.*;
 import org.hildan.fxgson.FxGson;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class EnlightSysInfoFetcher implements EnlightInfoFetcher
 {
-    private final OkHttpClient httpClient = new OkHttpClient();
     private SysInfo sysInfo;
 
     public EnlightSysInfoFetcher(SysInfo sysInfo)
@@ -23,6 +23,13 @@ public class EnlightSysInfoFetcher implements EnlightInfoFetcher
     @Override
     public void fetchInfo(String baseUrl)
     {
+        // Sometimes ESP32 devices may need more time to process the request, so here are some stupid tweaks...
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(90, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .build();
+
         // Expose all exceptions to warn the users if occur
         Request request = new Request.Builder().url(String.format("http://%s/sys_info", baseUrl)).build();
 
@@ -47,6 +54,7 @@ public class EnlightSysInfoFetcher implements EnlightInfoFetcher
                 // Deserialize the JSON to JavaFX model objects (e.g. StringProperty instead of ordinary String etc.)
                 Gson gson = FxGson.create();
                 SysInfo newInfo = gson.fromJson(response.body().string(), SysInfo.class);
+                response.close();
 
                 // Put into UI thread
                 Platform.runLater(() -> sysInfo.clone(newInfo));
