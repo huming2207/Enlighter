@@ -2,8 +2,19 @@ package helpers;
 
 public class EnlightPushResult
 {
-    private String message;
-    private int code;
+    private String message = "";
+    private int code = -1;
+    private boolean successful = false;
+
+    public boolean isSuccessful()
+    {
+        return successful;
+    }
+
+    public void setSuccessful(boolean successful)
+    {
+        this.successful = successful;
+    }
 
     public String getMessage()
     {
