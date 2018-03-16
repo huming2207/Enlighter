@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.EnlightFirmwareUpdater;
 import helpers.EnlightSettingPusher;
 import helpers.EnlightSysInfoFetcher;
 import helpers.interfaces.EnlightInfoFetcher;
@@ -7,9 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import models.SysInfo;
 
 import javax.xml.soap.Text;
+import java.io.File;
 import java.util.HashMap;
 
 public class AdvancedPageController
@@ -17,9 +21,11 @@ public class AdvancedPageController
     private SysInfo sysInfo = new SysInfo();
     private EnlightInfoFetcher infoFetcher = new EnlightSysInfoFetcher(this.sysInfo);
     private EnlightSettingPusher settingPusher;
+    private String deviceIp = null;
 
     public AdvancedPageController(String deviceIp)
     {
+        this.deviceIp = deviceIp;
         this.settingPusher = new EnlightSettingPusher(deviceIp);
         infoFetcher.fetchInfo(deviceIp);
     }
@@ -99,12 +105,23 @@ public class AdvancedPageController
     @FXML
     private void handleFirmwareSelection()
     {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Pick an image...");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
+                "Enlight firmware binary (*.bin/*.elf)", "*.bin", "*.elf"));
+        File file = fileChooser.showOpenDialog(new Stage());
 
+        // When user press cancel, the file will be null
+        if(file != null) firmwarePathTextBox.setText(file.getAbsolutePath());
     }
 
     @FXML
     private void handleFirmwareUpgrade()
     {
+        EnlightFirmwareUpdater.updateFirmware(this.deviceIp, firmwarePathTextBox.getText(), this);
+        Alert confirmedAlert = new Alert(Alert.AlertType.INFORMATION,
+                "Firmware upgrade now started, this app will be automatically closed if successful. Please open it again later.");
 
+        confirmedAlert.showAndWait();
     }
 }
