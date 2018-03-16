@@ -23,7 +23,7 @@
         </AnchorPane>
     </top>
     <center>
-        <AnchorPane prefHeight="213.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="mainPane" disable="true" prefHeight="213.0" prefWidth="602.0" BorderPane.alignment="CENTER">
             <Label layoutX="102.0" layoutY="25.0" text="Darker" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="102.0" AnchorPane.topAnchor="25.0" />
             <Slider fx:id="brightnessSlider" layoutX="168.0" layoutY="26.0" max="255" min="1" onMouseReleased="#handleBrightness" prefHeight="16.0" prefWidth="267.0" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="26.0" />
             <Label layoutX="447.0" layoutY="25.0" text="Brighter" AnchorPane.bottomAnchor="168.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="25.0" />
@@ -37,7 +37,7 @@
         </AnchorPane>
     </center>
     <bottom>
-        <TitledPane animated="false" collapsible="false" prefHeight="72.0" prefWidth="600.0" text="Advanced stuff" BorderPane.alignment="CENTER">
+        <TitledPane fx:id="advancedPane" animated="false" collapsible="false" disable="true" prefHeight="72.0" prefWidth="600.0" text="Advanced stuff" BorderPane.alignment="CENTER">
             <GridPane>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.0" minWidth="10.0" prefWidth="173.0" />
@@ -46,7 +46,7 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="321.0" text="Reset to default" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Button mnemonicParsing="false" onAction="#handleReset" prefHeight="25.0" prefWidth="321.0" text="Reset to default" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <GridPane.margin>
                         <Insets right="10.0" />
                     </GridPane.margin>

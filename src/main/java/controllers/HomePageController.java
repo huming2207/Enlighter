@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Device;
@@ -20,6 +21,7 @@ import models.LedInfo;
 import javax.jmdns.JmDNS;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Optional;
 
 public class HomePageController
 {
@@ -72,6 +74,12 @@ public class HomePageController
     private ToggleButton powerToggleButton;
 
     @FXML
+    private AnchorPane mainPane;
+
+    @FXML
+    private TitledPane advancedPane;
+
+    @FXML
     private void initialize()
     {
         // Bind device list to device combo box
@@ -82,14 +90,23 @@ public class HomePageController
 
         // Bind brightness to brightness slider
         brightnessSlider.valueProperty().bindBidirectional(ledInfo.brightnessProperty());
-
-
     }
 
     @FXML
     private void handleDeviceSelection()
     {
         this.selectedDevice = deviceComboBox.getValue();
+
+        // Enable panes
+        if(selectedDevice != null) {
+            mainPane.setDisable(false);
+            advancedPane.setDisable(false);
+        } else {
+            mainPane.setDisable(true);
+            advancedPane.setDisable(true);
+            return;
+        }
+
         System.out.println(String.format("Selected device: %s, IP: %s",
                 selectedDevice.getDeviceName(), selectedDevice.getDeviceAddr()));
 
@@ -170,5 +187,22 @@ public class HomePageController
         }
     }
 
+    @FXML
+    private void handleReset()
+    {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Reset settings to firmware default?",
+                ButtonType.APPLY, ButtonType.CANCEL);
+        Optional<ButtonType> result = alert.showAndWait();
 
+        if(result.isPresent() && result.get() == ButtonType.APPLY) {
+            settingPusher.commitSetting("factory", "true", "reset");
+        }
+
+        Alert confirmedAlert = new Alert(Alert.AlertType.INFORMATION,
+                "Reset successful, please restart this app.");
+
+        confirmedAlert.showAndWait();
+        System.exit(0);
+    }
 }
