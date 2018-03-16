@@ -2,15 +2,18 @@ package controllers;
 
 import helpers.EnlightLedInfoFetcher;
 import helpers.EnlightMDnsListener;
+import helpers.EnlightSysInfoFetcher;
+import helpers.interfaces.EnlightInfoFetcher;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Slider;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import models.Device;
 import models.LedInfo;
 import models.SysInfo;
@@ -23,21 +26,8 @@ public class HomeController
 {
     private ObjectProperty<ObservableList<Device>> deviceList;
     private LedInfo ledInfo = new LedInfo();
-    private SysInfo sysInfo = new SysInfo();
     private Device selectedDevice = null;
-    private EnlightLedInfoFetcher infoFetcher = new EnlightLedInfoFetcher(ledInfo);
-
-    @FXML
-    private ComboBox<Device> deviceComboBox;
-
-    @FXML
-    private Slider brightnessSlider;
-
-    @FXML
-    private Slider colorTempSlider;
-
-    @FXML
-    private ColorPicker freeColorPicker;
+    private EnlightInfoFetcher infoFetcher = new EnlightLedInfoFetcher(ledInfo);
 
     public HomeController()
     {
@@ -57,15 +47,26 @@ public class HomeController
         }
     }
 
-    public SysInfo getSysInfo()
+    public static void showError(String error)
     {
-        return this.sysInfo;
+        Alert alert = new Alert(Alert.AlertType.ERROR, error);
+        alert.show();
     }
 
-    public LedInfo getLedInfo()
-    {
-        return this.ledInfo;
-    }
+    @FXML
+    private ComboBox<Device> deviceComboBox;
+
+    @FXML
+    private Slider brightnessSlider;
+
+    @FXML
+    private Slider colorTempSlider;
+
+    @FXML
+    private ColorPicker freeColorPicker;
+
+    @FXML
+    private Button aboutButton;
 
     @FXML
     private void initialize()
@@ -90,9 +91,21 @@ public class HomeController
         infoFetcher.fetchInfo(this.selectedDevice.getDeviceAddr());
     }
 
-    public static void showError(String error)
+    @FXML
+    private void handleAboutButton()
     {
-        Alert alert = new Alert(Alert.AlertType.ERROR, error);
-        alert.show();
+        FXMLLoader aboutFxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/About.fxml"));
+        aboutFxmlLoader.setController(new AboutController(this.selectedDevice.getDeviceAddr()));
+        try {
+            Stage stage = new Stage();
+            stage.setScene(new Scene(aboutFxmlLoader.load()));
+            stage.setTitle("About");
+            stage.show();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Message: " + e.getMessage());
+            alert.setTitle("Failed to load About page");
+            e.printStackTrace();
+            alert.show();
+        }
     }
 }
