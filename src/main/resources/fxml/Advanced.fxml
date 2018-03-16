@@ -18,18 +18,18 @@
             <children>
                 <Label layoutX="119.0" layoutY="91.0" text="WiFi Name (SSID):" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="435.0" AnchorPane.topAnchor="91.0" />
                 <Label layoutX="136.0" layoutY="155.0" text="WiFi Password:" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="435.0" AnchorPane.topAnchor="155.0" />
-                <TextField layoutX="236.0" layoutY="87.0" prefHeight="25.0" prefWidth="282.0" AnchorPane.leftAnchor="236.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="87.0" />
-                <PasswordField layoutX="236.0" layoutY="151.0" prefHeight="25.0" prefWidth="282.0" AnchorPane.leftAnchor="236.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="151.0" />
-                <Button layoutX="253.0" layoutY="223.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="124.0" text="Save" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="273.0" AnchorPane.topAnchor="223.0" />
+                <TextField fx:id="wifiSsidTextBox" layoutX="236.0" layoutY="87.0" prefHeight="25.0" prefWidth="282.0" AnchorPane.leftAnchor="236.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="87.0" />
+                <PasswordField fx:id="wifiPasswdTextBox" layoutX="236.0" layoutY="151.0" prefHeight="25.0" prefWidth="282.0" AnchorPane.leftAnchor="236.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="151.0" />
+                <Button layoutX="201.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleWifiSave" prefHeight="54.0" prefWidth="249.0" text="Save" AnchorPane.leftAnchor="201.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="219.0" />
             </children>
         </AnchorPane>
     </Tab>
     <Tab text="Firmware upgrade">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
-                <TextField layoutX="69.0" layoutY="94.0" prefHeight="25.0" prefWidth="356.0" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="94.0" />
-                <Button layoutX="425.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="163.0" text="Select a firmware package" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="425.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="94.0" />
-                <Button layoutX="192.0" layoutY="161.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="267.0" text="Run firmware upgrade" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="161.0" />
+                <TextField fx:id="firmwarePathTextBox" layoutX="69.0" layoutY="94.0" prefHeight="25.0" prefWidth="356.0" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="94.0" />
+                <Button layoutX="425.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleFirmwareSelection" prefHeight="25.0" prefWidth="163.0" text="Select a firmware package" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="425.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="94.0" />
+                <Button layoutX="192.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleFirmwareUpgrade" prefHeight="60.0" prefWidth="267.0" text="Run firmware upgrade" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="161.0" />
             </children>
         </AnchorPane>
     </Tab>
