@@ -1,7 +1,7 @@
 package helpers;
 
 import com.google.gson.Gson;
-import controllers.HomeController;
+import controllers.HomePageController;
 import helpers.interfaces.EnlightInfoFetcher;
 import javafx.application.Platform;
 import models.SysInfo;
@@ -39,7 +39,7 @@ public class EnlightSysInfoFetcher implements EnlightInfoFetcher
             @Override
             public void onFailure(Call call, IOException e)
             {
-                HomeController.showError("OKHttp request failed: " + e.getMessage());
+                HomePageController.showError("OKHttp request failed: " + e.getMessage());
             }
 
             @Override

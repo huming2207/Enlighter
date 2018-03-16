@@ -9,12 +9,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import models.SysInfo;
 
-public class AboutController
+public class AdvancedPageController
 {
     private SysInfo sysInfo = new SysInfo();
     private EnlightInfoFetcher infoFetcher = new EnlightSysInfoFetcher(this.sysInfo);
 
-    public AboutController(String deviceIp)
+    public AdvancedPageController(String deviceIp)
     {
         infoFetcher.fetchInfo(deviceIp);
     }
